@@ -1,3 +1,5 @@
+import ContaBancaria as cb
+
 class SistemaBancario:
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
@@ -51,7 +53,7 @@ class SistemaBancario:
             return
 
         numero_conta = len(self.contas) + 1
-        conta = ContaBancaria()
+        conta = cb.ContaBancaria()
         conta.usuario = usuario
         self.contas.append(conta)
         print(f"Conta criada com sucesso para o CPF {cpf}.")
