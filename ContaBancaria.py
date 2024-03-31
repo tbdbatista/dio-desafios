@@ -4,6 +4,7 @@ class ContaBancaria:
         self.depositos = []
         self.saques = []
         self.saques_diarios = 0
+        self.limite = 500
 
     def depositar(self, valor):
         if valor > 0:
@@ -13,15 +14,15 @@ class ContaBancaria:
         else:
             print('O valor do depósito deve ser positivo.')
 
-    def sacar(self, valor):
+    def sacar(self, *, valor):
         if self.saques_diarios < 3:
-            if valor <= 500 and valor <= self.saldo:
+            if 0 < valor <= self.limite and valor <= self.saldo:
                 self.saldo -= valor
                 self.saques.append(valor)
                 self.saques_diarios += 1
                 print(f'Saque de R$ {valor:.2f} realizado com sucesso.')
-            elif valor > 500:
-                print('O valor máximo por saque é de R$ 500.00.')
+            elif valor > self.limite:
+                print(f'O valor máximo por saque é de R$ {self.limite:.2f}.')
             else:
                 print('Saldo insuficiente para realizar o saque.')
         else:
@@ -41,36 +42,3 @@ class ContaBancaria:
             print(f'Saque: R$ {saque:.2f}')
 
         print(f'Saldo atual: R$ {self.saldo:.2f}')
-
-
-def main():
-    conta = ContaBancaria()
-
-    menu = """
-    [d] Depositar
-    [s] Sacar
-    [e] Extrato
-    [q] Sair
-
-    => """
-
-    while True:
-        opcao = input(menu).lower()
-
-        if opcao == 'd':
-            valor = float(input("Digite o valor a ser depositado: "))
-            conta.depositar(valor)
-        elif opcao == 's':
-            valor = float(input("Digite o valor a ser sacado: "))
-            conta.sacar(valor)
-        elif opcao == 'e':
-            conta.extrato()
-        elif opcao == 'q':
-            print("Saindo...")
-            break
-        else:
-            print("Opção inválida. Por favor, escolha uma opção válida.")
-
-
-if __name__ == "__main__":
-    main()
