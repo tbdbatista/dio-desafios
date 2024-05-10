@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ContaTerminal {
+public class ContaBancaria{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
